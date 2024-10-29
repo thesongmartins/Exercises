@@ -15,6 +15,17 @@ const restaurant = {
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+  orderDeliverey: function ({ starterIndex, mainIndex, time, address }) {
+    console.log(`Order recieved! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`)
+  },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1}, ${ing2}, and ${ing3}`);
+  },
+  orderPizza: function (mainIngredient, ...otherIngredients) {
+    console.log(mainIngredient);
+    console.log(otherIngredients);
+  },
 
   openingHours: {
     thu: {
@@ -32,6 +43,13 @@ const restaurant = {
   },
 };
 
+
+restaurant.orderDeliverey({
+  time: '22:30',
+  address: 'Via del sole, 21',
+  mainIndex: 2,
+  starterIndex: 1,
+});
 
 // Destructuring OBJECTS 
 const { name, openingHours, categories } = restaurant;
@@ -52,23 +70,10 @@ const obj = { a: 23, b: 7, c: 14 };
 console.log(a, b);
 
 // Nested objects
+const { fri: { open, close } } = openingHours;
+console.log(open, close);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Destructuring Arrays.
 // Without Destructuring 
 const arr = [2, 3, 4];
 // const a = arr[0];
@@ -330,6 +335,73 @@ const ratingStars = [63405, 1808];
 const [fiveStarRatings, oneStarRatings, threeStarRatings = 0] = ratingStars;
 console.log(fiveStarRatings, oneStarRatings, threeStarRatings);
 
+// Spread Operators
+const arrr = [7, 8, 9];
+const badNewArr = [1, 2, arrr[0], arrr[1], arrr[2]];
+console.log(badNewArr);
 
+// Using spraed operators
+const newArr = [1, 2, ...arrr];
+console.log(newArr);
+const newMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+//Two important use cases of spread operator [creating shallow copies of array and Merging two arrays together].
+const mainMenuCopy = [...restaurant.mainMenu];
+
+//Joining 2 arrays 
+const menuu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+console.log(menuu);
+
+//Iterables: arrays, strings, maps, sets, NOT objects
+const str = 'Jonas';
+const letters = [...str, ' ', 's,'];
+console.log(letters);
+console.log(...str);
+
+// Real-world Example
+const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'), prompt('Ingredient 2?'), prompt(' Ingredient 3?')];
+console.log(ingredients);
+restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+restaurant.orderPasta(...ingredients);
+
+//Objects ... Operator.
+const newRestaurant = { foundIn: 1998, ...restaurant, founder: 'Guiseppe' };
+console.log(newRestaurant);
+const restaurantCopy = { ...restaurant };
+restaurantCopy.name = 'Ristorante Roma';
+console.log(restaurantCopy.name);
+console.log(restaurant.name);
+
+// 1) Destructuring
+// Rest Patterns and Parameters
+//Spread, because on Right side of =
+const arrrr = [1, 2, ...[3, 4]];
+
+//REST, because on the LEFT side of =
+const [e, f, ...others] = [1, 2, 3, 4, 5];
+console.log(e, f, others);
+const [pizza, , risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(pizza, risotto, otherFood);
+
+//REST in Objects
+const { sat, ...weekdays } = restaurant.openingHours;
+console.log(weekdays);
+
+// 2) Functions
+const add = function (...numbers) {
+  let sum = 0;
+  for (let i = 0; i < numbers.length; i++)sum += numbers[i];
+  console.log(sum);
+}
+add(2, 3);
+add(5, 3, 7, 2);
+add(8, 2, 5, 3, 2, 1, 4);
+
+const s = [23, 5, 7];
+add(...s);
+
+restaurant.orderPizza('Mushrooms', 'Onion', 'Olives', 'Spinach');
+restaurant.orderPizza('Mushrooms');
 
 
