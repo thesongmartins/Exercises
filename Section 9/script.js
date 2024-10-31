@@ -360,10 +360,10 @@ console.log(letters);
 console.log(...str);
 
 // Real-world Example
-const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'), prompt('Ingredient 2?'), prompt(' Ingredient 3?')];
-console.log(ingredients);
-restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
-restaurant.orderPasta(...ingredients);
+// const ingredients = [prompt('Let\'s make pasta! Ingredient 1?'), prompt('Ingredient 2?'), prompt(' Ingredient 3?')];
+// console.log(ingredients);
+// restaurant.orderPasta(ingredients[0], ingredients[1], ingredients[2]);
+// restaurant.orderPasta(...ingredients);
 
 //Objects ... Operator.
 const newRestaurant = { foundIn: 1998, ...restaurant, founder: 'Guiseppe' };
@@ -404,4 +404,66 @@ add(...s);
 restaurant.orderPizza('Mushrooms', 'Onion', 'Olives', 'Spinach');
 restaurant.orderPizza('Mushrooms');
 
+// Short Circuiting (&& and ||)
+console.log('---- OR ----');
+// They can use any data type, they return any data type and they do short circuiting.
+
+
+console.log(3 || 'Jonas');
+console.log('' || 'Jonas');
+console.log(true || 0);
+console.log(undefined || null);
+
+console.log(undefined || 0 || '' || 'Hello' || 23 || null);
+
+// restaurant.numGuests = 0;
+// const guests = restaurant.numGuests || 10;
+// console.log(guests)
+
+const guest1 = restaurant.numGuests ? restaurant.numGuests : 10;
+console.log(guest1);
+
+const guest2 = restaurant.numGuests || 10;
+console.log(guest2);
+
+
+
+console.log('---- AND ----');
+console.log(0 && 'Jonas');
+console.log(7 && 'Jonas');
+console.log('Hello' && 23 && null && 'Jonas');
+
+if (restaurant.orderPizza) {
+  restaurant.orderPizza('Mushrooms', 'Spinach');
+}
+restaurant.orderPizza && restaurant.orderPizza('Mushroom', 'Spinach');
+
+
+//The Nullish coalescing Operator
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+//Nullish: Null and undefined
+const guestCorrect = restaurant.numGuests ?? 10;
+console.log(guestCorrect);
+
+// Logicall Assignment Operators
+const rest1 = {
+  name: 'Capri',
+  numGuests: 20,
+}
+const rest2 = {
+  name: 'la Piazza',
+  owner: 'Giovanni rossi',
+}
+rest1.numGuests = rest1.numGuests || 10;
+rest2.numGuests = rest2.numGuests || 10;
+//OR operator
+rest1.numGuests ||= 10;
+rest2.numGuests ||= 10;
+
+
+console.log(rest1);
+console.log(rest2);
 
