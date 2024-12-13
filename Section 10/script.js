@@ -74,11 +74,11 @@ const transformer = (str, fn) => {
 transformer('JavaScript is the best!', upperFirstWord);
 transformer('JavaScript is the best!', oneWord);
 //Js uses callbacks all the time.
-const high5 = () => {
-    console.log("Hello");
-}
-document.body.addEventListener('click', high5);
-['Jonas', 'Martha', 'Adam'].forEach(high5);
+// const high5 = () => {
+//     console.log("Hello");
+// }
+// document.body.addEventListener('click', high5);
+// ['Jonas', 'Martha', 'Adam'].forEach(high5);
 
 // Functions returning functions
 const greet = (greeting) => {
@@ -97,7 +97,7 @@ const lufthansa = {
     airline: 'Lufthansa',
     iataCode: 'LH',
     bookings: [],
-    // Bokk: () =>{}
+    // Book: () =>{}
     book(flightNum, name) {
         console.log(`${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`);
         this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name })
@@ -127,3 +127,29 @@ const swiss = {
 book.call(swiss, 583, 'Frances Ejiro');
 console.log(swiss);
 // Apply Method
+const flightData = [583, 'George Cooper'];
+book.apply(swiss, flightData);
+console.log(swiss);
+book.call(swiss, ...flightData);
+console.log(swiss);
+
+// The Bind Method.
+const bookEw = book.bind(eurowings);
+const bookSw = book.bind(swiss);
+const bookLh = book.bind(lufthansa);
+
+bookEw(23, 'Steven Williams');
+const bookEw23 = book.bind(eurowings, 23);
+bookEw23('Jonas Schedtmann');
+bookEw23('Emmanuel Uzoma');
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+    this.planes++;
+    console.log(this);
+    console.log(this.planes);
+}
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane);
+
+
+
