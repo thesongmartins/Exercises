@@ -145,11 +145,43 @@ bookEw23('Emmanuel Uzoma');
 // With Event Listeners
 lufthansa.planes = 300;
 lufthansa.buyPlane = function () {
-    this.planes++;
     console.log(this);
+    this.planes++;
     console.log(this.planes);
 }
-document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane);
+// lufthansa.buyPlane();
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial Application of Bind method
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+// addVAT = value => value + value * 0.23; This is the same as the above.
+console.log(addVAT(100));
+console.log(addVAT(23));
+console.log(addVAT(200));
+// Challenge 
+// const taxAdd = (value) => (rate, value) => value + value * rate;
+
+// const addedVat = taxAdd(null, 0.23);
+// console.log(addedVat(100));
+
+const addTaxRate = function (rate) {
+    return function (value) {
+        return value + value * rate;
+    }
+}
+const addVAT2 = addTaxRate(0.23);
+console.log(addVAT2(100));
+
+// Coding Challenge of the Section
+const poll = {
+    question: "What is your favourite programming language?",
+    options: ["0: Javascript", "2: Python", "3: "]
+}
+
+
 
 
 
